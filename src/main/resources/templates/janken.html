@@ -10,14 +10,15 @@
 
   <div><a href="/logout">ログアウト</a></div>
   <h1>JanKen GAME!</h1>
-  <div th:if="${room}">
+
+  <p th:if="${users}">
     エントリー
+  <div th:each="users,stat:${users}">
     <ul>
-      <li th:each="user : ${room.users}">[[${user}]]</li>
+      <li>[[${users.name}]]</li>
     </ul>
   </div>
-  Hi <span sec:authentication="name"></span>
-  </br>
+  </p>
 
   <a href="/rock">ぐー</a>
   <a href="/scissors">ちょき</a>
