@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>JanKen GAME!</title>
+</head>
+
+<body>
+
+  <div><a href="/logout">ログアウト</a></div>
+  <h1>JanKen GAME!</h1>
+  <div th:if="${room}">
+    エントリー
+    <ul>
+      <li th:each="user : ${room.users}">[[${user}]]</li>
+    </ul>
+  </div>
+  Hi <span sec:authentication="name"></span>
+  </br>
+
+  <a href="/rock">ぐー</a>
+  <a href="/scissors">ちょき</a>
+  <a href="/paper">ぱー</a>
+
+  <p>
+  <div th:if="${hand}">
+    あなたの手 [[${hand}]]<br>
+    相手の手 Gu<br>
+    結果[[${result}]]<br>
+  </div>
+  </p>
+
+</body>
+
+</html>
