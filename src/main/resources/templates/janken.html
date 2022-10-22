@@ -10,9 +10,12 @@
 
   <div><a href="/logout">ログアウト</a></div>
   <h1>JanKen GAME!</h1>
+  <div th:if="${loginUser}">
+    Hi [[${loginUser}]]
+  </div>
 
   <p th:if="${users}">
-    エントリー
+  <h2>エントリー</h2>
   <div th:each="users,stat:${users}">
     <ul>
       <li>[[${users.name}]]</li>
@@ -20,15 +23,16 @@
   </div>
   </p>
 
-  <a href="/rock">ぐー</a>
-  <a href="/scissors">ちょき</a>
-  <a href="/paper">ぱー</a>
-
-  <p>
-  <div th:if="${hand}">
-    あなたの手 [[${hand}]]<br>
-    相手の手 Gu<br>
-    結果[[${result}]]<br>
+  <p th:if="${matches}">
+  <h2>試合結果</h2>
+  <div th:each="matches,stat:${matches}">
+    <tr>
+      <td>id:[[${matches.id}]]</td>
+      <td>user1:[[${matches.user1}]]</td>
+      <td>user2:[[${matches.user2}]]</td>
+      <td>user1の手:[[${matches.user1Hand}]]</td>
+      <td>user2の手:[[${matches.user2Hand}]]</td>
+    </tr>
   </div>
   </p>
 
