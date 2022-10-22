@@ -18,7 +18,7 @@
   <h2>エントリー</h2>
   <div th:each="users,stat:${users}">
     <ul>
-      <li>[[${users.name}]]</li>
+      <li th:each="user : ${users}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
     </ul>
   </div>
   </p>

@@ -50,6 +50,15 @@ public class JankenController {
     return "janken.html";
   }
 
+  @GetMapping("/match")
+  public String match(@RequestParam Integer id, Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    model.addAttribute("loginUser", loginUser);
+    User users = userMapper.selectById(id);
+    model.addAttribute("users", users);
+    return "match.html";
+  }
+
   @PostMapping("/name")
   public String name(@RequestParam String name, ModelMap model) {
     String nameResult = name;
