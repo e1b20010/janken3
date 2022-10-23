@@ -17,6 +17,17 @@
   </h2>
   </p>
 
+  <a th:href="@{/fight(id=${users.id},hand=Gu)}">ぐー</a>
+  <a th:href="@{/fight(id=${users.id},hand=Choki)}">ちょき</a>
+  <a th:href="@{/fight(id=${users.id},hand=Pa)}">ぱー</a>
+
+  <p>
+  <p th:if="${match}">
+    あなたの手 [[${match.user1Hand}]]<br>
+    相手の手 [[${match.user2Hand}]]<br>
+    結果[[${result}]]<br>
+  </p>
+  <a href="/janken">もどる</a>
 </body>
 
 </html>

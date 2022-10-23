@@ -46,6 +46,37 @@ public class JankenController {
     return "match.html";
   }
 
+  @GetMapping("/fight")
+  public String fight(@RequestParam Integer id, @RequestParam String hand, Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    model.addAttribute("loginUser", loginUser);
+    User user1 = userMapper.selectByName(prin.getName());
+    User users = userMapper.selectById(id);
+    model.addAttribute("user1", user1);
+    model.addAttribute("users", users);
+    Match match = new Match();
+    match.setUser1(user1.getId());
+    match.setUser2(users.getId());
+    match.setUser1Hand(hand);
+    match.setUser2Hand("Gu");
+
+    String result;
+    if (hand.equals("Gu")) {
+      result = "Draw!";
+    } else if (hand.equals("Choki")) {
+      result = "You Lose!";
+    } else if (hand.equals("Pa")) {
+      result = "You Win!";
+    } else {
+      result = "Error";
+    }
+    model.addAttribute("result", result);
+
+    matchMapper.insertMatch(match);
+    model.addAttribute("match", match);
+    return "match.html";
+  }
+
   @PostMapping("/name")
   public String name(@RequestParam String name, ModelMap model) {
     String nameResult = name;
