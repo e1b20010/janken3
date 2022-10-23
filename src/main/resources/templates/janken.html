@@ -18,7 +18,7 @@
   <h2>エントリー</h2>
   <div th:each="users,stat:${users}">
     <ul>
-      <li>[[${users.name}]]</li>
+      <li th:each="user:${users}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
     </ul>
   </div>
 
@@ -34,18 +34,6 @@
       <td>user2:[[${matches.user2}]]</td>
       <td>user2の手:[[${matches.user2Hand}]]</td>
     </tr>
-  </div>
-  </p>
-
-  <a href="/rock">ぐー</a>
-  <a href="/scissors">ちょき</a>
-  <a href="/paper">ぱー</a>
-
-  <p>
-  <div th:if="${hand}">
-    あなたの手 [[${hand}]]<br>
-    相手の手 Gu<br>
-    結果[[${result}]]<br>
   </div>
   </p>
 
