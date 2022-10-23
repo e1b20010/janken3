@@ -5,18 +5,15 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z0604.kaizi.janken2.model.Entry;
 import oit.is.z0604.kaizi.janken2.model.User;
-import oit.is.z0604.kaizi.janken2.model.UserMapper;
 import oit.is.z0604.kaizi.janken2.model.Match;
+import oit.is.z0604.kaizi.janken2.model.UserMapper;
 import oit.is.z0604.kaizi.janken2.model.MatchMapper;
 
 @Controller
@@ -38,6 +35,15 @@ public class JankenController {
     ArrayList<Match> matches = matchMapper.selectAllMatch();
     model.addAttribute("matches", matches);
     return "janken.html";
+  }
+
+  @GetMapping("/match")
+  public String match(@RequestParam Integer id, Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    model.addAttribute("loginUser", loginUser);
+    User users = userMapper.selectById(id);
+    model.addAttribute("users", users);
+    return "match.html";
   }
 
   @PostMapping("/name")
