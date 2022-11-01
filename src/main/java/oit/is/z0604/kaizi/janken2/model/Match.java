@@ -6,6 +6,7 @@ public class Match {
   int user2;
   String user1Hand;
   String user2Hand;
+  boolean isActive = false;
 
   public String getUser1Hand() {
     return user1Hand;
