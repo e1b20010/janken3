@@ -18,21 +18,16 @@ public class JankenAuthConfiguration {
     UserBuilder users = User.builder();
 
     UserDetails user1 = users
-        .username("user1")
-        .password("$2y$10$Be5UlEWL/KsSo0UNO4phYuMpj/zeX7KLLhg1luEegjP6qpna9X7Ri")
+        .username("いがき")
+        .password("$2y$10$x3zG7V5Ei4KJWuVQvPowV.zd.5iNYU4S1yNATrWf0X2Tr6FD57YBC")
         .roles("USER")
         .build();
     UserDetails user2 = users
-        .username("user2")
-        .password("$2y$10$2ZUK0wrxgWoPThXxTVMEpulE.ouoT0Xd0bRS7kPV9MoAF0hl/DH7e")
-        .roles("USER")
-        .build();
-    UserDetails user3 = users
         .username("ほんだ")
         .password("$2y$10$P0dvHqebethDAvym4fZxrO9h74OZwGPbPCDfdcVuBq3ZUygBgopu6")
         .roles("USER")
         .build();
-    return new InMemoryUserDetailsManager(user1, user2, user3);
+    return new InMemoryUserDetailsManager(user1, user2);
   }
 
   @Bean
