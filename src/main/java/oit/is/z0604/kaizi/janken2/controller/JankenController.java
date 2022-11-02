@@ -36,6 +36,8 @@ public class JankenController {
     model.addAttribute("loginUser", loginUser);
     ArrayList<User> users = userMapper.selectAllUser();
     model.addAttribute("users", users);
+    ArrayList<MatchInfo> matchinfo = matchInfoMapper.selectActiveMatchInfo();
+    model.addAttribute("matchinfo", matchinfo);
     ArrayList<Match> matches = matchMapper.selectAllMatch();
     model.addAttribute("matches", matches);
     return "janken.html";
