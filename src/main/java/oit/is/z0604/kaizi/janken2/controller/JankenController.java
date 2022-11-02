@@ -15,6 +15,8 @@ import oit.is.z0604.kaizi.janken2.model.User;
 import oit.is.z0604.kaizi.janken2.model.Match;
 import oit.is.z0604.kaizi.janken2.model.UserMapper;
 import oit.is.z0604.kaizi.janken2.model.MatchMapper;
+import oit.is.z0604.kaizi.janken2.model.MatchInfo;
+import oit.is.z0604.kaizi.janken2.model.MatchInfoMapper;
 
 @Controller
 public class JankenController {
@@ -25,6 +27,8 @@ public class JankenController {
   UserMapper userMapper;
   @Autowired
   MatchMapper matchMapper;
+  @Autowired
+  MatchInfoMapper matchInfoMapper;
 
   @GetMapping("/janken")
   public String janken(Principal prin, ModelMap model) {
@@ -54,27 +58,14 @@ public class JankenController {
     User users = userMapper.selectById(id);
     model.addAttribute("user1", user1);
     model.addAttribute("users", users);
-    Match match = new Match();
-    match.setUser1(user1.getId());
-    match.setUser2(users.getId());
-    match.setUser1Hand(hand);
-    match.setUser2Hand("Gu");
-
-    String result;
-    if (hand.equals("Gu")) {
-      result = "Draw!";
-    } else if (hand.equals("Choki")) {
-      result = "You Lose!";
-    } else if (hand.equals("Pa")) {
-      result = "You Win!";
-    } else {
-      result = "Error";
-    }
-    model.addAttribute("result", result);
-
-    matchMapper.insertMatch(match);
-    model.addAttribute("match", match);
-    return "match.html";
+    MatchInfo matchinfo = new MatchInfo();
+    matchinfo.setUser1(user1.getId());
+    matchinfo.setUser2(users.getId());
+    matchinfo.setUser1Hand(hand);
+    matchinfo.setIsActive(true);
+    matchInfoMapper.insertMatchInfo(matchinfo);
+    model.addAttribute("matchinfo", matchinfo);
+    return "wait.html";
   }
 
   @PostMapping("/name")
