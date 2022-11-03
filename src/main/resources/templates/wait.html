@@ -4,12 +4,68 @@
 <head>
   <meta charset="utf-8">
   <title>Match</title>
+
+  <script>
+    window.onload = function () {
+      var sse = new EventSource('active');
+      sse.onmessage = function (event) {
+        console.log("sse.onmessage")
+        console.log(event.data);
+        var match_list = JSON.parse(event.data);
+        var match_table = "";
+        for (var i = 0; i < match_list.length; i++) {
+          var result = "<tr>" + "<h1>" + "結果" + "</h1>" + " </tr>";
+          var back = "<br>" + "<a href='/janken'>" + "もどる" + "</a>";
+          var bgn_tr = "<tr>";
+          var end_tr = "</tr>";
+          var match = "<td>" + "Match: " + "</td>";
+          var id = "<td>" + "id:" + match_list[i].id + " </td>";
+          var user1 = "<td>" + "user1: " + match_list[i].user1 + " </td>";
+          var user2 = "<td>" + "user2: " + match_list[i].user2 + " </td>";
+          var user1Hand = "<td>" + "user1Hand: " + match_list[i].user1Hand + " </td>";
+          var user2Hand = "<td>" + "user2Hand: " + match_list[i].user2Hand + " </td>";
+          match_table = match_table + bgn_tr + match + id + user1 + user2 + user1Hand + user2Hand + end_tr;
+
+        }
+        if (match.length > 1) {
+          match_table = result + match_table + back;
+        }
+        console.log(match_table);
+        var tbody = document.getElementById("match_list");
+        tbody.innerHTML = match_table;//idがfruits_listのtbodyのHTMLを差し替える
+
+      }
+    }
+  </script>
+
 </head>
 
 <body>
   <h1>相手の手を待っています</h1>
   <div th:if="${loginUser}">
     Hi [[${loginUser}]]
+  </div>
+
+  <div id="match_list">
+    <span th:if="${Amatch}">
+      <h1>結果</h1>
+    </span>
+  </div>
+
+  <div>
+    <table>
+      <tbody id="match_list">
+        <span th:if="${Amatch}">
+          <tr th:each="matches,stat:${Amatch}">yy
+            <td>[[${matches.id}]]</td>
+            <td>[[${matches.user1}]]</td>
+            <td>[[${matches.user2}]]</td>
+            <td>[[${matches.user1Hand}]]</td>
+            <td>[[${matches.user2Hand}]]</td>
+          </tr>
+        </span>
+      </tbody>
+    </table>
   </div>
 
 </body>
